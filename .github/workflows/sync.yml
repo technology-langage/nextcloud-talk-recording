@@ -1,0 +1,24 @@
+name: Sync Fork
+
+on:
+  schedule:
+    # 毎日午前0時（UTC）に自動実行
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 手動実行ボタンも有効化
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Sync upstream changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/nextcloud/talk-recording.git
+          git fetch upstream
+          git checkout main || git checkout master
+          git merge upstream/main --no-edit || git merge upstream/master --no-edit
+          git push origin HEAD
