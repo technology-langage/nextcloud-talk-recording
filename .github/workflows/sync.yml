@@ -17,7 +17,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git remote add upstream https://github.com/nextcloud/talk-recording.git
+          git remote add upstream https://github.com/nextcloud/nextcloud-talk-recording.git
           git fetch upstream
           git checkout main || git checkout master
           git merge upstream/main --no-edit || git merge upstream/master --no-edit
