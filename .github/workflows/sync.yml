@@ -14,9 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0 # 履歴をすべて取得（共通の祖先を見つけるため）
+          token: ${{ secrets.SYNC_TOKEN }} # 本家のワークフロー更新も push できる鍵（Secrets に登録）
 
       - name: Sync upstream changes
         run: |
